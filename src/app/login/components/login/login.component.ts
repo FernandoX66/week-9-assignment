@@ -10,7 +10,9 @@ import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { saveCart } from 'src/app/products-cart/products-cart.actions';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { saveUser } from '../../login.actions';
 
 @Component({
@@ -27,8 +29,9 @@ export class LoginComponent implements OnInit {
     private _fb: FormBuilder,
     private _authService: AuthService,
     private _store: Store,
-    private _router: Router,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _cartService: CartService,
+    private _router: Router
   ) {
     this.form = this._fb.group({
       email: ['', Validators.required],
@@ -59,6 +62,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(user.data.user));
         localStorage.setItem('token', user.data.token);
         this._store.dispatch(saveUser({ user: user.data }));
+        this._cartService.getCart().subscribe((cart) => {
+          this._store.dispatch(saveCart({ cart: cart.data }));
+        });
         this._router.navigate(['']);
       },
       (error: Response) => {

@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { CartService } from 'src/app/services/cart.service';
 import { Cart } from '../../interfaces/cart-interface';
-import { saveCart } from '../../products-cart.actions';
 import { cartSelector } from '../../products-cart.selectors';
 
 @Component({
@@ -30,35 +27,11 @@ export class ProductsCartComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(
-    private _cartService: CartService,
-    private _store: Store,
-    private _snackbar: MatSnackBar
-  ) {
+  constructor(private _store: Store) {
     this._store.select(cartSelector).subscribe((cart) => {
       this.cart = cart;
     });
   }
 
-  ngOnInit(): void {
-    this._cartService.getCart().subscribe(
-      (cart) => {
-        this._store.dispatch(saveCart({ cart: cart.data }));
-      },
-      (error: Response) => {
-        if (error.status === 401) {
-          this._snackbar.open(
-            'You must be logged in to see your cart',
-            'Close',
-            {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-            }
-          );
-        } else {
-          alert(error);
-        }
-      }
-    );
-  }
+  ngOnInit(): void {}
 }

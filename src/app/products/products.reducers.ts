@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Product } from './interfaces/product-interface';
-import { rateProduct, saveProducts } from './products.actions';
+import { filterProducts, rateProduct, saveProducts } from './products.actions';
 
 export interface State {
   products: Product[];
@@ -39,6 +39,34 @@ export const productsReducer = createReducer(
     return {
       ...state,
       products: updatedProducts,
+    };
+  }),
+
+  on(filterProducts, (state, action) => {
+    let storeProducts = action.products.products;
+
+    if (action.value[0] === 'None') {
+      return {
+        ...state,
+        products: storeProducts,
+      };
+    }
+
+    let filteredProducts = [];
+
+    for (let product of storeProducts) {
+      for (let categorie of action.value) {
+        if (
+          product.category.name.toLowerCase().includes(categorie.toLowerCase())
+        ) {
+          filteredProducts.push(product);
+        }
+      }
+    }
+
+    return {
+      ...state,
+      products: filteredProducts,
     };
   })
 );

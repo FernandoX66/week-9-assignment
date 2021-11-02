@@ -1,8 +1,9 @@
 <div class="products-div">
   <h1>Products</h1>
-  <mat-label>Filter by category</mat-label>
+  <mat-label>Filter by category: </mat-label>
   <select #select (change)="filterProducts(select.value)">
-    <option *ngFor="let categorie of categories" [value]="categorie.name">
+    <option value="None">None</option>
+    <option *ngFor="let categorie of categories" [value]="categorie.slug">
       {{ categorie.name }}
     </option>
   </select>

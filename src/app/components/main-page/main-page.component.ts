@@ -43,14 +43,14 @@ export class MainPageComponent implements OnInit {
       };
 
       this._store.dispatch(saveUser({ user: user }));
+
+      this._cartService.getCart().subscribe((cart) => {
+        this._store.dispatch(saveCart({ cart: cart.data }));
+      });
     }
 
     this._productsService.getProducts().subscribe((products) => {
       this._store.dispatch(saveProducts({ products: products.data }));
-    });
-
-    this._cartService.getCart().subscribe((cart) => {
-      this._store.dispatch(saveCart({ cart: cart.data }));
     });
   }
 

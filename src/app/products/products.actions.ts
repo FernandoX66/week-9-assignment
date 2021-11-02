@@ -11,3 +11,8 @@ export const rateProduct = createAction(
   '[Products Page] Product rated',
   props<RateResponse>()
 );
+
+export const filterProducts = createAction(
+  '[Products Page] Products filtered',
+  props<{ products: Products; value: string[] }>()
+);

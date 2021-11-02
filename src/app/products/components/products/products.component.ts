@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { Product } from '../../interfaces/product-interface';
+import { Products } from '../../interfaces/products-interface';
+import { filterProducts } from '../../products.actions';
 import { productsSelector } from '../../products.selectors';
 
 @Component({
@@ -16,7 +19,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _store: Store,
-    private _categoriesService: CategoriesService
+    private _categoriesService: CategoriesService,
+    private _productsService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +37,15 @@ export class ProductsComponent implements OnInit {
   }
 
   filterProducts(value: string): void {
-    console.log(value);
+    let categories = value.split('-');
+
+    this._productsService.getProducts().subscribe((products) => {
+      this._store.dispatch(
+        filterProducts({
+          products: { products: products.data },
+          value: categories,
+        })
+      );
+    });
   }
 }

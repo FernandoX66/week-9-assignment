@@ -14,8 +14,9 @@
       </button>
       {{ product.likes_down_count }}
     </p>
+    <img mat-card-image [src]="product.image?.url" />
+    <p>Categories: {{ product.category.name }}</p>
   </mat-card-content>
-  <img mat-card-image [src]="product.image?.url" />
   <mat-card-actions>
     <p>
       <button mat-icon-button (click)="removeItem()">

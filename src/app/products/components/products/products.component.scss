@@ -1,6 +1,13 @@
 .products-div {
   padding: 40px;
 
+  select {
+    padding: 12px;
+    margin: 0 0 10px 10px;
+    border: none;
+    outline: none;
+  }
+
   .products {
     margin-top: 15px;
 

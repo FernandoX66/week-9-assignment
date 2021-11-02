@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/products/interfaces/product-interface';
 import { Item } from '../../interfaces/cart-interface';
 
 @Component({

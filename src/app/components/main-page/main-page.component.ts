@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { CartResponse } from 'src/app/interfaces/cart-response-interface';
 import { User } from 'src/app/login/interfaces/login-interface';
 import { deleteUser, saveUser } from 'src/app/login/login.actions';
 import {
@@ -26,7 +28,14 @@ import { UserInformation } from './interfaces/user-information.interface';
 export class MainPageComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
-  user: any = {};
+  user: User | undefined = {
+    token: '',
+    user: {
+      id: 0,
+      email: '',
+      name: '',
+    },
+  };
 
   constructor(
     private _store: Store,
@@ -49,7 +58,7 @@ export class MainPageComponent implements OnInit {
 
       this._store.dispatch(saveUser({ user: user }));
 
-      this._cartService.getCart().subscribe((cart) => {
+      this._cartService.getCart().subscribe((cart: CartResponse) => {
         this._store.dispatch(saveCart({ cart: cart.data }));
       });
     }
@@ -58,10 +67,12 @@ export class MainPageComponent implements OnInit {
       this._store.dispatch(saveProducts({ products: products.data }));
     });
 
-    this._store.select(userSelector).subscribe((user) => (this.user = user));
+    this._store
+      .select(userSelector)
+      .subscribe((user) => (this.user = user.user));
   }
 
-  logOut(sidenav: any): void {
+  logOut(sidenav: MatSidenav): void {
     this._store.dispatch(deleteUser());
     this._store.dispatch(deleteCart());
     localStorage.removeItem('token');

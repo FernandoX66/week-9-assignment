@@ -13,7 +13,7 @@ import { cartSelector } from '../../products-cart.selectors';
   styleUrls: ['./products-cart.component.scss'],
 })
 export class ProductsCartComponent implements OnInit {
-  cart: Cart = {
+  cart: Cart | undefined = {
     id: '',
     user_id: '',
     number: '',

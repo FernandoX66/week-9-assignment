@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Category } from 'src/app/interfaces/categories-response-interface';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { Product } from '../../interfaces/product-interface';
-import { Products } from '../../interfaces/products-interface';
+import { Product } from '../../../interfaces/product-interface';
 import { filterProducts } from '../../products.actions';
 import { productsSelector } from '../../products.selectors';
 
@@ -15,7 +14,7 @@ import { productsSelector } from '../../products.selectors';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  categories: any[] = [];
+  categories: Category[] = [];
 
   constructor(
     private _store: Store,

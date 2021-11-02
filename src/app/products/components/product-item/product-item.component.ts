@@ -5,12 +5,11 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
 import { saveCart } from 'src/app/products-cart/products-cart.actions';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { Product } from '../../interfaces/product-interface';
-import { RateResponse } from '../../interfaces/rate-response-interface';
+import { Error } from '../../interfaces/error-interface';
+import { Product } from '../../../interfaces/product-interface';
 import { rateProduct } from '../../products.actions';
 
 @Component({
@@ -19,7 +18,40 @@ import { rateProduct } from '../../products.actions';
   styleUrls: ['./product-item.component.scss'],
 })
 export class ProductItemComponent implements OnInit {
-  @Input() product: any = {};
+  @Input() product: Product = {
+    id: 0,
+    slug: '',
+    name: '',
+    description: '',
+    active: '',
+    likes_count: '',
+    likes_up_count: '',
+    likes_down_count: '',
+    published_at: '',
+    master: {
+      id: '',
+      sku: '',
+      price: '',
+      promotional_price: '',
+      stock: '',
+      weight: '',
+      height: '',
+      width: '',
+      depth: '',
+      is_master: '',
+      position: '',
+    },
+    category: {
+      id: '',
+      slug: '',
+      name: '',
+    },
+    image: {
+      id: '',
+      url: '',
+    },
+  };
+
   itemCount: number = 1;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -44,7 +76,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   addItemsToCart(): void {
-    const updatedCart = {
+    const productToAdd = {
       data: {
         items: [
           {
@@ -55,11 +87,11 @@ export class ProductItemComponent implements OnInit {
       },
     };
 
-    this._cartService.updateCart(updatedCart).subscribe(
+    this._cartService.updateCart(productToAdd).subscribe(
       (cart) => {
         this._store.dispatch(saveCart({ cart: cart.data }));
       },
-      (error: any) => {
+      (error: Error) => {
         if (error.status === 401) {
           this._snackbar.open(
             'You must be logged in to add a product to your cart',
@@ -70,7 +102,7 @@ export class ProductItemComponent implements OnInit {
             }
           );
         } else if (error.status === 422) {
-          if (error.error.errors[0].message === 'Not enough stock') {
+          if (error.errors[0].message === 'Not enough stock') {
             this._snackbar.open(
               'There is no stock available for this product',
               'Close',

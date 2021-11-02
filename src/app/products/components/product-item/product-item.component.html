@@ -26,7 +26,11 @@
       <button mat-icon-button (click)="addItem()">
         <mat-icon color="accent">add_circle</mat-icon>
       </button>
-      <button mat-icon-button (click)="addItemsToCart()">
+      <button
+        mat-icon-button
+        matTooltip="Add product to cart"
+        (click)="addItemsToCart()"
+      >
         <mat-icon color="primary">add_shopping_cart</mat-icon>
       </button>
     </p>

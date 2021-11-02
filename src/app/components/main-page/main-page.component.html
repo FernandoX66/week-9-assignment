@@ -8,9 +8,27 @@
     </button>
     <input #input type="text" matInput placeholder="Search product" />
   </mat-form-field>
-  <button mat-icon-button>
+  <p *ngIf="isLoggedIn$ | async"></p>
+  <button
+    *ngIf="isLoggedOut$ | async"
+    mat-icon-button
+    matTooltip="User information"
+    [matMenuTriggerFor]="menu"
+  >
     <mat-icon>account_circle</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <mat-list>
+      <mat-list-item
+        ><mat-icon mat-list-icon color="primary">person</mat-icon
+        >{{ user?.user?.user?.name }}</mat-list-item
+      >
+      <mat-list-item
+        ><mat-icon mat-list-icon color="primary">email</mat-icon
+        >{{ user?.user?.user?.email }}</mat-list-item
+      >
+    </mat-list>
+  </mat-menu>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container" fullscreen>
   <mat-sidenav mode="side" #sidenav>

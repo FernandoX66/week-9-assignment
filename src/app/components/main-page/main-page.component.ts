@@ -4,7 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/login/interfaces/login-interface';
 import { deleteUser, saveUser } from 'src/app/login/login.actions';
-import { loginSelector, logOutSelector } from 'src/app/login/login.selectors';
+import {
+  loginSelector,
+  logOutSelector,
+  userSelector,
+} from 'src/app/login/login.selectors';
 import {
   deleteCart,
   saveCart,
@@ -22,6 +26,7 @@ import { UserInformation } from './interfaces/user-information.interface';
 export class MainPageComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
+  user: any = {};
 
   constructor(
     private _store: Store,
@@ -52,6 +57,8 @@ export class MainPageComponent implements OnInit {
     this._productsService.getProducts().subscribe((products) => {
       this._store.dispatch(saveProducts({ products: products.data }));
     });
+
+    this._store.select(userSelector).subscribe((user) => (this.user = user));
   }
 
   logOut(sidenav: any): void {

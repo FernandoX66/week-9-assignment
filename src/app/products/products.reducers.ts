@@ -20,19 +20,18 @@ export const productsReducer = createReducer(
   }),
 
   on(rateProduct, (state, action) => {
+    let currentProducts = [];
     let updatedProducts = [];
 
     for (let i = 0; i < state.products.length; i++) {
-      updatedProducts[i] = { ...state.products[i] };
+      currentProducts[i] = { ...state.products[i] };
     }
 
-    for (let product of updatedProducts) {
-      if (product.id == action.data.product_id) {
-        if (action.data.kind == '1') {
-          product.likes_up_count += 1;
-        } else {
-          product.likes_down_count += 1;
-        }
+    for (let product of currentProducts) {
+      if (product.id == action.product.id) {
+        updatedProducts.push(action.product);
+      } else {
+        updatedProducts.push(product);
       }
     }
 

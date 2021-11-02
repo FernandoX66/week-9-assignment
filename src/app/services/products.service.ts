@@ -35,4 +35,10 @@ export class ProductsService {
       }
     );
   }
+
+  getRatedProduct(productId: number): Observable<any> {
+    return this._http.get(
+      `https://trainee-program-api.applaudostudios.com/api/v1/products?include=image_attachment.blob,category,master&[page][size]=42&[filter][id_eq]=${productId}`
+    );
+  }
 }

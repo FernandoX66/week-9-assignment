@@ -3,9 +3,17 @@ mat-toolbar {
   justify-content: space-between;
 
   mat-form-field {
-    width: 500px;
+    width: 120px;
     font-size: 14px;
     margin-top: 15px;
+
+    @media (min-width: 300px) {
+      width: 200px;
+    }
+
+    @media (min-width: 600px) {
+      width: 400px;
+    }
   }
 }
 

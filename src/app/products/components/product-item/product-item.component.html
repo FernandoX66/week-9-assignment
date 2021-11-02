@@ -5,11 +5,11 @@
   </mat-card-header>
   <mat-card-content
     ><p>
-      <button mat-icon-button (click)="likeProduct()">
+      <button mat-icon-button (click)="rateProduct('up')">
         <mat-icon color="primary">thumb_up</mat-icon>
       </button>
       {{ product.likes_up_count }}
-      <button mat-icon-button (click)="dislikeProduct()">
+      <button mat-icon-button (click)="rateProduct('down')">
         <mat-icon color="warn">thumb_down</mat-icon>
       </button>
       {{ product.likes_down_count }}

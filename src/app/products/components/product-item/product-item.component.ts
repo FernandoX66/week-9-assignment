@@ -5,9 +5,11 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
+import { combineLatest, Observable } from 'rxjs';
 import { saveCart } from 'src/app/products-cart/products-cart.actions';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { Product } from '../../interfaces/product-interface';
 import { RateResponse } from '../../interfaces/rate-response-interface';
 import { rateProduct } from '../../products.actions';
 
@@ -94,33 +96,19 @@ export class ProductItemComponent implements OnInit {
     );
   }
 
-  likeProduct(): void {
-    this._productsService.rateProduct(this.product.id, 'up').subscribe(
-      (response: RateResponse) => this._store.dispatch(rateProduct(response)),
+  rateProduct(kind: string): void {
+    this._productsService.rateProduct(this.product.id, kind).subscribe(
+      (response) => {
+        this._productsService
+          .getRatedProduct(response.data.product_id)
+          .subscribe((response: { data: Product[] }) => {
+            this._store.dispatch(rateProduct({ product: response.data[0] }));
+          });
+      },
       (error: Response) => {
         if (error.status === 401) {
           this._snackbar.open(
             'You must be logged in to like a product',
-            'Close',
-            {
-              horizontalPosition: this.horizontalPosition,
-              verticalPosition: this.verticalPosition,
-            }
-          );
-        } else {
-          alert(error);
-        }
-      }
-    );
-  }
-
-  dislikeProduct(): void {
-    this._productsService.rateProduct(this.product.id, 'down').subscribe(
-      (response) => this._store.dispatch(rateProduct(response)),
-      (error: Response) => {
-        if (error.status === 401) {
-          this._snackbar.open(
-            'You must be logged in to dislike a product',
             'Close',
             {
               horizontalPosition: this.horizontalPosition,

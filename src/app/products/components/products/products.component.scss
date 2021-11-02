@@ -13,9 +13,17 @@
     margin-top: 15px;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     column-gap: 15px;
     row-gap: 15px;
+
+    @media (min-width: 670px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 850px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     @media (min-width: 1200px) {
       grid-template-columns: repeat(4, 1fr);

@@ -1,0 +1,40 @@
+<mat-toolbar color="primary" role="heading"
+  ><button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-form-field appearance="fill">
+    <button mat-icon-button matSuffix (click)="searchProducts(input.value)">
+      <mat-icon>search</mat-icon>
+    </button>
+    <input #input type="text" matInput placeholder="Search product" />
+  </mat-form-field>
+  <button mat-icon-button>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container" fullscreen>
+  <mat-sidenav mode="side" #sidenav>
+    <mat-nav-list>
+      <a mat-list-item routerLink="products" (click)="sidenav.close()"
+        ><mat-icon mat-list-icon color="primary">inventory_2</mat-icon>
+        Products</a
+      >
+      <a mat-list-item routerLink="cart" (click)="sidenav.close()"
+        ><mat-icon mat-list-icon color="primary">shopping_cart</mat-icon>Cart</a
+      >
+      <a
+        mat-list-item
+        routerLink="login"
+        (click)="sidenav.close()"
+        *ngIf="isLoggedIn$ | async"
+        ><mat-icon mat-list-icon color="primary">login</mat-icon>Login</a
+      >
+      <a mat-list-item (click)="logOut(sidenav)" *ngIf="isLoggedOut$ | async"
+        ><mat-icon mat-list-icon color="primary">logout</mat-icon>Logout</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

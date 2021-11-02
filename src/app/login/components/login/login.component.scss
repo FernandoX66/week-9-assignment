@@ -1,0 +1,26 @@
+.login-div {
+  padding: 20px;
+
+  form {
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px #00000042;
+
+    h1 {
+      text-align: center;
+    }
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 14px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}

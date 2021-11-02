@@ -1,0 +1,18 @@
+<div class="products-div">
+  <h1>Products</h1>
+  <mat-label>Filter by category</mat-label>
+  <select #select (change)="filterProducts(select.value)">
+    <option *ngFor="let categorie of categories" [value]="categorie.name">
+      {{ categorie.name }}
+    </option>
+  </select>
+  <mat-divider></mat-divider>
+
+  <div class="products">
+    <app-product-item
+      *ngFor="let product of products"
+      [product]="product"
+      class="product-card"
+    ></app-product-item>
+  </div>
+</div>

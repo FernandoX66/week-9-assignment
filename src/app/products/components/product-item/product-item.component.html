@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>{{ product.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content
+    ><p>
+      <button mat-icon-button (click)="likeProduct()">
+        <mat-icon color="primary">thumb_up</mat-icon>
+      </button>
+      {{ product.likes_up_count }}
+      <button mat-icon-button (click)="dislikeProduct()">
+        <mat-icon color="warn">thumb_down</mat-icon>
+      </button>
+      {{ product.likes_down_count }}
+    </p>
+  </mat-card-content>
+  <img mat-card-image [src]="product.image?.url" />
+  <mat-card-actions>
+    <p>
+      <button mat-icon-button (click)="removeItem()">
+        <mat-icon color="accent">remove_circle</mat-icon>
+      </button>
+      {{ itemCount }}
+      <button mat-icon-button (click)="addItem()">
+        <mat-icon color="accent">add_circle</mat-icon>
+      </button>
+      <button mat-icon-button (click)="addItemsToCart()">
+        <mat-icon color="primary">add_shopping_cart</mat-icon>
+      </button>
+    </p>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ item.name }}</mat-card-title>
+    <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ item.price | currency }} x {{ item.quantity }} =
+      {{ item.total | currency }}
+    </p>
+  </mat-card-content>
+</mat-card>

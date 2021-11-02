@@ -1,0 +1,70 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$primary-color-palette: (
+  200: #5e92f3,
+  500: #1565c0,
+  700: #003c8f,
+  contrast: (
+    200: #000000,
+    500: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$accent-color-palette: (
+  200: #fff350,
+  500: #ffc107,
+  700: #c79100,
+  contrast: (
+    200: #000000,
+    500: #000000,
+    700: #000000,
+  ),
+);
+
+$warn-color-palette: (
+  200: #ee6c66,
+  500: #fc351b,
+  700: #dc1917,
+  contrast: (
+    200: #000000,
+    500: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$primary-palette: mat-palette($primary-color-palette);
+$accent-palette: mat-palette($accent-color-palette);
+$warn-palette: mat-palette($warn-color-palette);
+
+$theme: mat-light-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+      warn: $warn-palette,
+    ),
+  )
+);
+
+@include angular-material-theme($theme);
+
+// @use "~@angular/material";
+
+// $primary-color: mat.define-palette(mat.$indigo-palette, 700);
+// $accent-color: mat.define-palette(mat.$yellow-palette, 400);
+// $warn-color: mat.define-palette(mat.$orange-palette, 700);
+
+// $custom-theme: mat.define-light-theme(
+//   (
+//     color: (
+//       primary: $primary-color,
+//       accent: $accent-color,
+//       warn: $warn-color,
+//     ),
+//   )
+// );
+
+// @include mat.all-component-themes($custom-theme);

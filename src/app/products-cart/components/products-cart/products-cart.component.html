@@ -1,0 +1,11 @@
+<div class="products-cart-div">
+  <h1>Shopping Cart</h1>
+  <mat-divider></mat-divider>
+  <div *ngIf="cart" class="items">
+    <app-cart-item
+      *ngFor="let item of cart.items"
+      [item]="item"
+    ></app-cart-item>
+    <h2>Total: {{ cart.total | currency }}</h2>
+  </div>
+</div>

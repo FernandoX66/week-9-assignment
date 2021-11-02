@@ -1,0 +1,27 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+
+  mat-form-field {
+    width: 500px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}
+
+.sidenav-container {
+  top: 56px !important;
+
+  @media (min-width: 599px) {
+    top: 64px !important;
+  }
+
+  mat-sidenav {
+    width: 200px;
+    box-shadow: 0 0 8px #0000005b;
+
+    mat-list-item {
+      text-align: center;
+    }
+  }
+}

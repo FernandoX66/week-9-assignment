@@ -5,7 +5,7 @@ import { CartResponse } from 'src/app/interfaces/cart-response-interface';
 import { ItemToRemove } from 'src/app/interfaces/item-to-remove-interface';
 import { CartService } from 'src/app/services/cart.service';
 import { Item } from '../../interfaces/cart-interface';
-import { deleteCart, saveCart } from '../../products-cart.actions';
+import { removeCart, saveCart } from '../../products-cart.actions';
 
 @Component({
   selector: 'app-cart-item',
@@ -48,7 +48,7 @@ export class CartItemComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         if (error.error.errors[0].message === `can't be blank`) {
-          this._store.dispatch(deleteCart());
+          this._store.dispatch(removeCart());
           this._cartService.deleteCart().subscribe();
         } else {
           alert(error);

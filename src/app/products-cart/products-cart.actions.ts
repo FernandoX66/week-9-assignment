@@ -7,3 +7,5 @@ export const saveCart = createAction(
 );
 
 export const deleteCart = createAction('[Home page] User logout');
+
+export const removeCart = createAction('[Cart page] User removed all items');

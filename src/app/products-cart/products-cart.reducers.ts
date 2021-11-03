@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { deleteUser } from '../login/login.actions';
 import { Cart } from './interfaces/cart-interface';
-import { saveCart } from './products-cart.actions';
+import { deleteCart, removeCart, saveCart } from './products-cart.actions';
 
 export interface State {
   cart: Cart | undefined;
@@ -20,7 +19,14 @@ export const cartReducer = createReducer(
     };
   }),
 
-  on(deleteUser, (state, action) => {
+  on(deleteCart, (state, action) => {
+    return {
+      ...state,
+      cart: undefined,
+    };
+  }),
+
+  on(removeCart, (state, action) => {
     return {
       ...state,
       cart: undefined,

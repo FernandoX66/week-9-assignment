@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Category } from 'src/app/interfaces/categories-response-interface';
@@ -31,7 +32,7 @@ export class ProductsComponent implements OnInit {
       (categories) => {
         this.categories = categories.data;
       },
-      (error) => alert(error)
+      (error: HttpErrorResponse) => alert(error)
     );
   }
 

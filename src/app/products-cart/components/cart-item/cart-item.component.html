@@ -8,5 +8,12 @@
       {{ item.price | currency }} x {{ item.quantity }} =
       {{ item.total | currency }}
     </p>
+    <button
+      mat-icon-button
+      matTooltip="Remove item from cart"
+      (click)="removeItem()"
+    >
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
   </mat-card-content>
 </mat-card>

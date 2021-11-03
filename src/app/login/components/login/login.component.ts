@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
         });
         this._router.navigate(['']);
       },
-      (error: Response) => {
+      (error: HttpErrorResponse) => {
         if (error.status === 401) {
           this._snackbar.open('Incorrect email or password', 'Close', {
             horizontalPosition: this.horizontalPosition,

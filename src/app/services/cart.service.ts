@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartResponse } from '../interfaces/cart-response-interface';
+import { ItemToRemove } from '../interfaces/item-to-remove-interface';
 import { ProductToAdd } from '../interfaces/product-to-add-interface';
 import { cartSelector } from '../products-cart/products-cart.selectors';
 
@@ -23,6 +24,19 @@ export class CartService {
   getCart(): Observable<CartResponse> {
     return this._http.get<CartResponse>(
       'https://trainee-program-api.applaudostudios.com/api/v1/cart'
+    );
+  }
+
+  deleteCart(): Observable<any> {
+    return this._http.delete<any>(
+      'https://trainee-program-api.applaudostudios.com/api/v1/cart'
+    );
+  }
+
+  removeFromCart(itemToRemove: ItemToRemove): Observable<CartResponse> {
+    return this._http.put<CartResponse>(
+      'https://trainee-program-api.applaudostudios.com/api/v1/cart',
+      itemToRemove
     );
   }
 

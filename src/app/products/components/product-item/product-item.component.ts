@@ -8,9 +8,9 @@ import { Store } from '@ngrx/store';
 import { saveCart } from 'src/app/products-cart/products-cart.actions';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { Error } from '../../interfaces/error-interface';
 import { Product } from '../../../interfaces/product-interface';
 import { rateProduct } from '../../products.actions';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-item',
@@ -91,7 +91,7 @@ export class ProductItemComponent implements OnInit {
       (cart) => {
         this._store.dispatch(saveCart({ cart: cart.data }));
       },
-      (error: Error) => {
+      (error: HttpErrorResponse) => {
         if (error.status === 401) {
           this._snackbar.open(
             'You must be logged in to add a product to your cart',
@@ -102,7 +102,7 @@ export class ProductItemComponent implements OnInit {
             }
           );
         } else if (error.status === 422) {
-          if (error.errors[0].message === 'Not enough stock') {
+          if (error.error.errors[0].message === 'Not enough stock') {
             this._snackbar.open(
               'There is no stock available for this product',
               'Close',
@@ -137,7 +137,7 @@ export class ProductItemComponent implements OnInit {
             this._store.dispatch(rateProduct({ product: response.data[0] }));
           });
       },
-      (error: Response) => {
+      (error: HttpErrorResponse) => {
         if (error.status === 401) {
           this._snackbar.open(
             'You must be logged in to like a product',

@@ -1,5 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CartResponse } from 'src/app/interfaces/cart-response-interface';
+import { ItemToRemove } from 'src/app/interfaces/item-to-remove-interface';
+import { CartService } from 'src/app/services/cart.service';
 import { Item } from '../../interfaces/cart-interface';
+import { deleteCart, saveCart } from '../../products-cart.actions';
 
 @Component({
   selector: 'app-cart-item',
@@ -20,7 +26,34 @@ export class CartItemComponent implements OnInit {
     promotion: '',
   };
 
-  constructor() {}
+  constructor(private _cartService: CartService, private _store: Store) {}
 
   ngOnInit(): void {}
+
+  removeItem(): void {
+    let itemToRemove: ItemToRemove = {
+      data: {
+        items: [
+          {
+            id: this.item.id,
+            _destroy: true,
+          },
+        ],
+      },
+    };
+
+    this._cartService.removeFromCart(itemToRemove).subscribe(
+      (cart: CartResponse) => {
+        this._store.dispatch(saveCart({ cart: cart.data }));
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error.errors[0].message === `can't be blank`) {
+          this._store.dispatch(deleteCart());
+          this._cartService.deleteCart().subscribe();
+        } else {
+          alert(error);
+        }
+      }
+    );
+  }
 }

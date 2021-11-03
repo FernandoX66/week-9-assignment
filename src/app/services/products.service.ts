@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LikeResponse } from '../interfaces/like-response-interface';
-import { Product } from '../interfaces/product-interface';
 import { ProductsResponse } from '../interfaces/products-response-interface';
 
 @Injectable()

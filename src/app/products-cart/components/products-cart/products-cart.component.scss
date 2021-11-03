@@ -4,10 +4,11 @@
   .items {
     display: grid;
     row-gap: 15px;
-    max-width: 700px;
+    max-width: 600px;
     margin: 15px auto;
 
     h2 {
+      margin-top: 0 !important;
       text-align: right;
       margin-top: 10px;
     }

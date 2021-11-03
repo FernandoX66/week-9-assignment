@@ -1,0 +1,26 @@
+<h2>
+  <span>{{ data.product.name }}</span> was successfully added to your cart!
+</h2>
+<div class="dialog-div">
+  <div>
+    <img [src]="data.product.image.url" />
+  </div>
+  <div>
+    <p>{{ data.product.description }}</p>
+    <p><b>Category:</b> {{ data.product.category.name }}</p>
+    <p><b>Quantity:</b> {{ data.count }}</p>
+  </div>
+</div>
+<div class="buttons-div">
+  <button
+    mat-raised-button
+    color="accent"
+    mat-dialog-close
+    (click)="goCartPage()"
+  >
+    Go to cart
+  </button>
+  <button mat-raised-button mat-dialog-close color="primary">
+    Continue shopping
+  </button>
+</div>

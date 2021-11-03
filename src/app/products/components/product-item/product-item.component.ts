@@ -11,6 +11,8 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Product } from '../../../interfaces/product-interface';
 import { rateProduct } from '../../products.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 
 @Component({
   selector: 'app-product-item',
@@ -60,7 +62,8 @@ export class ProductItemComponent implements OnInit {
     private _cartService: CartService,
     private _productsService: ProductsService,
     private _snackbar: MatSnackBar,
-    private _store: Store
+    private _store: Store,
+    private _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -90,6 +93,9 @@ export class ProductItemComponent implements OnInit {
     this._cartService.updateCart(productToAdd).subscribe(
       (cart) => {
         this._store.dispatch(saveCart({ cart: cart.data }));
+        this._dialog.open(ProductDialogComponent, {
+          data: { product: this.product, count: this.itemCount },
+        });
       },
       (error: HttpErrorResponse) => {
         if (error.status === 401) {

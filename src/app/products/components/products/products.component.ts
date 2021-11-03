@@ -39,13 +39,16 @@ export class ProductsComponent implements OnInit {
   filterProducts(value: string): void {
     let categories = value.split('-');
 
-    this._productsService.getProducts().subscribe((products) => {
-      this._store.dispatch(
-        filterProducts({
-          products: { products: products.data },
-          value: categories,
-        })
-      );
-    });
+    this._productsService.getProducts().subscribe(
+      (products) => {
+        this._store.dispatch(
+          filterProducts({
+            products: { products: products.data },
+            value: categories,
+          })
+        );
+      },
+      (error: HttpErrorResponse) => console.log(error)
+    );
   }
 }

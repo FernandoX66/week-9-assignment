@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
@@ -58,14 +59,20 @@ export class MainPageComponent implements OnInit {
 
       this._store.dispatch(saveUser({ user: user }));
 
-      this._cartService.getCart().subscribe((cart: CartResponse) => {
-        this._store.dispatch(saveCart({ cart: cart.data }));
-      });
+      this._cartService.getCart().subscribe(
+        (cart: CartResponse) => {
+          this._store.dispatch(saveCart({ cart: cart.data }));
+        },
+        (error: HttpErrorResponse) => console.log(error)
+      );
     }
 
-    this._productsService.getProducts().subscribe((products) => {
-      this._store.dispatch(saveProducts({ products: products.data }));
-    });
+    this._productsService.getProducts().subscribe(
+      (products) => {
+        this._store.dispatch(saveProducts({ products: products.data }));
+      },
+      (error: HttpErrorResponse) => console.log(error)
+    );
 
     this._store
       .select(userSelector)
@@ -82,8 +89,11 @@ export class MainPageComponent implements OnInit {
   }
 
   searchProducts(input: string): void {
-    this._productsService.searchProducts(input).subscribe((products) => {
-      this._store.dispatch(saveProducts({ products: products.data }));
-    });
+    this._productsService.searchProducts(input).subscribe(
+      (products) => {
+        this._store.dispatch(saveProducts({ products: products.data }));
+      },
+      (error: HttpErrorResponse) => console.log(error)
+    );
   }
 }

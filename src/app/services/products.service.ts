@@ -22,9 +22,6 @@ export class ProductsService {
   }
 
   rateProduct(productId: number, kind: string): Observable<LikeResponse> {
-    let token = localStorage.getItem('token');
-    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     return this._http.post<LikeResponse>(
       'https://trainee-program-api.applaudostudios.com/api/v1/likes',
       {
@@ -32,9 +29,6 @@ export class ProductsService {
           product_id: productId,
           kind: kind,
         },
-      },
-      {
-        headers: headers,
       }
     );
   }

@@ -21,30 +21,21 @@ export class CartService {
   }
 
   getCart(): Observable<CartResponse> {
-    let token = localStorage.getItem('token');
-    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     return this._http.get<CartResponse>(
-      'https://trainee-program-api.applaudostudios.com/api/v1/cart',
-      { headers: headers }
+      'https://trainee-program-api.applaudostudios.com/api/v1/cart'
     );
   }
 
   updateCart(productToAdd: ProductToAdd): Observable<CartResponse> {
-    let token = localStorage.getItem('token');
-    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     if (this.hasCart === true) {
       return this._http.put<CartResponse>(
-        'https://trainee-program-api.applaudostudios.com/api/v1/cart?include=image_attachment.blob,category,master',
-        productToAdd,
-        { headers: headers }
+        'https://trainee-program-api.applaudostudios.com/api/v1/cart',
+        productToAdd
       );
     } else {
       return this._http.post<CartResponse>(
-        'https://trainee-program-api.applaudostudios.com/api/v1/cart?include=image_attachment.blob,category,master',
-        productToAdd,
-        { headers: headers }
+        'https://trainee-program-api.applaudostudios.com/api/v1/cart',
+        productToAdd
       );
     }
   }

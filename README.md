@@ -1,6 +1,6 @@
 # Store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7, you can check that link if you don't have it installed.
 
 ## Development server
 
@@ -28,4 +28,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Aditional information
 
-- You can see this project by visiting: https://store-ed64e.web.app/
+Make sure to install the project dependencies by using "npm install" in the project's root.
+
+- You can visit this site by using the following link: https://store-ed64e.web.app/
+- You can see all the available products without logging in.
+- You can filter products by category, or search them by their name.
+- To like or dislike a product, see your cart and add products to your cart, you must be logged in.
+- You can delete products from your cart.

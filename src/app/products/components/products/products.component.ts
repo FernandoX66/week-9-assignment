@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ease, fade, grow } from 'src/app/app.animations';
 import { Category } from 'src/app/interfaces/categories-response-interface';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -12,6 +13,7 @@ import { productsSelector } from '../../products.selectors';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
+  animations: [fade, grow, ease],
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];

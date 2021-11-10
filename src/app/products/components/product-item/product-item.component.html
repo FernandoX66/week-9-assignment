@@ -8,14 +8,16 @@
       <button mat-icon-button (click)="rateProduct('up')">
         <mat-icon color="primary">thumb_up</mat-icon>
       </button>
-      {{ product.likes_up_count }}
+      <span class="details">{{ product.likes_up_count }}</span>
       <button mat-icon-button (click)="rateProduct('down')">
         <mat-icon color="warn">thumb_down</mat-icon>
       </button>
-      {{ product.likes_down_count }}
+      <span class="details">{{ product.likes_down_count }}</span>
     </p>
     <img mat-card-image [src]="product.image?.url" />
-    <p>Categories: {{ product.category.name }}</p>
+    <p>
+      <span class="details">{{ product.category.name }}</span>
+    </p>
   </mat-card-content>
   <mat-card-actions>
     <p>

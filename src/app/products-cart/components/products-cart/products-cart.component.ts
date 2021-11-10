@@ -4,6 +4,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
+import { ease } from 'src/app/app.animations';
 import { Cart } from '../../interfaces/cart-interface';
 import { cartSelector } from '../../products-cart.selectors';
 
@@ -11,6 +12,7 @@ import { cartSelector } from '../../products-cart.selectors';
   selector: 'app-products-cart',
   templateUrl: './products-cart.component.html',
   styleUrls: ['./products-cart.component.scss'],
+  animations: [ease],
 })
 export class ProductsCartComponent implements OnInit {
   cart: Cart | undefined = {

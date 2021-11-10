@@ -5,7 +5,8 @@
   </mat-card-header>
   <mat-card-content>
     <p>
-      {{ item.price | currency }} x {{ item.quantity }} =
+      <span class="details">{{ item.price | currency }}</span> x
+      <span class="details">{{ item.quantity }}</span> =
       {{ item.total | currency }}
     </p>
     <button

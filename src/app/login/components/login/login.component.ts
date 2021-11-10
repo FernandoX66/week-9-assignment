@@ -11,6 +11,7 @@ import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { ease } from 'src/app/app.animations';
 import { saveCart } from 'src/app/products-cart/products-cart.actions';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -20,6 +21,7 @@ import { saveUser } from '../../login.actions';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  animations: [ease],
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;

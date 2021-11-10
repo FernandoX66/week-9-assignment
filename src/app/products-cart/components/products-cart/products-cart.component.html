@@ -1,4 +1,4 @@
-<div class="products-cart-div">
+<div class="products-cart-div" @ease>
   <h1>Shopping Cart</h1>
   <mat-divider></mat-divider>
   <div *ngIf="cart" class="items">
@@ -6,7 +6,9 @@
       *ngFor="let item of cart.items"
       [item]="item"
     ></app-cart-item>
-    <h2>Total: {{ cart.total | currency }}</h2>
+    <h2>
+      Total: <span class="total">{{ cart.total | currency }}</span>
+    </h2>
     <button mat-raised-button color="accent">Pay cart</button>
   </div>
 </div>

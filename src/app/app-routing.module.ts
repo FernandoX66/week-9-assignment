@@ -4,7 +4,7 @@ import { ProductsCartComponent } from './products-cart/components/products-cart/
 import { LoginComponent } from './login/components/login/login.component';
 import { ProductsComponent } from './products/components/products/products.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
